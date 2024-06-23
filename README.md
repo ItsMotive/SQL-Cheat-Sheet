@@ -51,6 +51,26 @@ A repository to recall commonly used SQL commands.
   LIMIT number
   ```
 
+- ### OFFSET
+  - Used to skip a specified number of rows before beginning to return the rows from the query. It is commonly used in conjunction with the LIMIT (or FETCH) clause to implement pagination in a result set.
+  products
+  product_id | product_name | price
+  --- | --- | --- |
+  1 | Product A | 10.00
+  2 | Product B | 20.00
+  3 | Product C | 30.00
+  4 | Product D | 40.00
+  5 | Product E | 50.00
+
+    - Basic Pagination
+    ```
+    SELECT product_id, product_name, price
+    FROM products
+    ORDER BY product_id
+    OFFSET 2 ROWS
+    FETCH NEXT 2 ROWS ONLY;
+    ```
+
 # Advanced SQL Queries
 
 ### Example Tables: 
