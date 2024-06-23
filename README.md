@@ -71,7 +71,7 @@ A repository to recall commonly used SQL commands.
     OFFSET 2 ROWS
     FETCH NEXT 2 ROWS ONLY;
     ```
-    products
+    Results:
     product_id | product_name | price
     --- | --- | --- |
     4 | Product D | 40.00
