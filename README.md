@@ -21,6 +21,10 @@ A repository to recall commonly used SQL commands.
   - [Example Tables](#example-tables)
   - [Joins](#joins)
     - [INNER JOIN](#inner-join)
+    - [LEFT JOIN](#LEFT-JOIN-(or-LEFT-OUTER-JOIN))
+    - [](#)
+    - [](#)
+    - [](#)
 
 # Definitions
 ### SQL
