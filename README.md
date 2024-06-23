@@ -23,7 +23,7 @@ A repository to recall commonly used SQL commands.
     - [INNER JOIN](#inner-join)
 
 # Definitions
-## SQL
+### SQL
 - Structured Query Language
 - Used for managing and manipulating relational databases
 
