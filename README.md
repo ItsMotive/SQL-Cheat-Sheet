@@ -63,13 +63,26 @@ A repository to recall commonly used SQL commands.
   4 | Product D | 40.00
   5 | Product E | 50.00
 
-    - Basic Pagination
+    - ### Basic Pagination
     ```
     SELECT product_id, product_name, price
     FROM products
     ORDER BY product_id
     OFFSET 2 ROWS
     FETCH NEXT 2 ROWS ONLY;
+    ```
+    Results:
+    product_id | product_name | price
+    --- | --- | --- |
+    4 | Product D | 40.00
+    5 | Product E | 50.00
+
+    - ### Skipping Rows
+    ```
+    SELECT product_id, product_name, price
+    FROM products
+    ORDER BY product_id
+    OFFSET 3 ROWS;
     ```
     Results:
     product_id | product_name | price
