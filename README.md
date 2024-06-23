@@ -53,7 +53,7 @@ A repository to recall commonly used SQL commands.
 
 # Advanced SQL Queries
 
-Example Tables: 
+### Example Tables: 
 
 employee
 employee_id | employee_name | dept_id
@@ -72,9 +72,9 @@ dept_id | dept_name
 
 - ### Joins
   - INNER JOIN
-    - An INNER JOIN returns only the rows that have matching values in both tables
+    - Returns only the rows that have matching values in both tables.
     ```
-    SELECT employees.emp_name, departments.dept_name
+    SELECT employees.employee_name, departments.dept_name
     FROM employees
     INNER JOIN departments
     ON employees.dept_id = departments.dept_id;
@@ -87,30 +87,89 @@ dept_id | dept_name
     Jane Smith | Engineering
     
   - LEFT JOIN (or LEFT OUTER JOIN)
+    - Returns all rows from the left table, and the matched rows from the right table. If no match is found, NULL values are returned for columns from the right table.
     ```
-    SELECT * FROM table_name
+    SELECT employees.employee_name, departments.dept_name
+    FROM employees
+    LEFT JOIN departments
+    ON employees.dept_id = departments.dept_id;
     ```
+    Result:
+    employee_name | dept_name
+    --- | --- |
+    John Doe | HR
+    Alice Jones | HR
+    Jane Smith | Engineering
+    Bob Brown | NULL
     
   - RIGHT JOIN (or RIGHT OUTER JOIN)
+    - Returns all rows from the right table, and the matched rows from the left table. If no match is found, NULL values are returned for columns from the left table.
     ```
-    SELECT * FROM table_name
+    SELECT employees.employee_name, departments.dept_name
+    FROM employees
+    RIGHT JOIN departments
+    ON employees.dept_id = departments.dept_id;
     ```
+    Result:
+    employee_name | dept_name
+    --- | --- |
+    John Doe | HR
+    Alice Jones | HR
+    Jane Smith | Engineering
+    NULL | Sales
     
   - FULL JOIN (or FULL OUTER JOIN)
+    - Returns all rows when there is a match in either left or right table. If there is no match, the result is NULL on the side that does not have a match.
     ```
-    SELECT * FROM table_name
+    SELECT employees.employee_name, departments.dept_name
+    FROM employees
+    FULL OUTER JOIN departments
+    ON employees.dept_id = departments.dept_id;
     ```
+    Result:
+    employee_name | dept_name
+    --- | --- |
+    John Doe | HR
+    Alice Jones | HR
+    Jane Smith | Engineering
+    Bob Brown | NULL
+    NULL | Sales
     
   - CROSS JOIN
+    - Returns the Cartesian product of the two tables, i.e., it returns all possible combinations of rows from the two tables.
     ```
-    SELECT * FROM table_name
+    SELECT employees.employee_name, departments.dept_name
+    FROM employees
+    CROSS JOIN departments;
     ```
+    Result:
+    employee_name | dept_name
+    --- | --- |
+    John Doe | HR
+    John Doe | Engineering
+    John Doe | Sales
+    Jane Smith | HR
+    Jane Smith | Engineering
+    Jane Smith | Sales
+    Alice Jones | HR
+    Alice Jones | Engineering
+    Alice Jones | Sales
+    Bob Brown | HR
+    Bob Brown | Engineering
+    Bob Brown | Sales
     
   - SELF JOIN
+    - A regular join, but the table is joined with itself. This can be useful to compare rows within the same table.
     ```
-    SELECT * FROM table_name
+    SELECT e1.employee_name AS Employee1, e2.employee_name AS Employee2, e1.dept_id
+    FROM employees e1
+    INNER JOIN employees e2
+    ON e1.dept_id = e2.dept_id
+    AND e1.employee_id < e2.employee_id;
     ```
-
+    Employee1 | Employee2 | dept_id
+    --- | --- | --- |
+    John Doe | Alice Jones | 101
 
 - ### Insert
   - Inserts data into table
