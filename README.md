@@ -10,7 +10,7 @@ A repository to recall commonly used SQL commands.
   - [UPDATE](#update)
   - [DELETE](#delete)
 - [Basic Queries](#basic-queries)
-  - [SELECT](#select)
+  - [SELECT](#select-1)
   - [WHERE](#where)
   - [ORDER BY](#order-by)
   - [LIMIT](#limit)
