@@ -9,8 +9,13 @@ A repository to recall commonly used SQL commands.
 - Used for managing and manipulating relational databases
 
 # Commands
-- ## SELECT : Assigns what columns the query will return
-- ## FROM : Assigns the table to be used
-- ## INSERT : Adds new records to table
-- ## UPDATE : Modifies existing records
-- ## DELETE : Removes record from table
+- ### SELECT
+  - Assigns what columns the query will return
+- ### FROM
+  - Assigns the table to be used
+- ### INSERT
+  - Adds new records to table
+- ### UPDATE
+  - Modifies existing records
+- ### DELETE
+  - Removes record from table
