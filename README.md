@@ -25,6 +25,7 @@ A repository to recall commonly used SQL commands.
     - [RIGHT JOIN](#RIGHT-JOIN-or-RIGHT-OUTER-JOIN)
     - [FULL JOIN](#FULL-JOIN-or-FULL-OUTER-JOIN)
     - [CROSS JOIN](#CROSS-JOIN)
+    - [SELF JOIN](#SELF-JOIN)
 
 # Definitions
 ### SQL
