@@ -66,7 +66,7 @@ employee_id | employee_name | dept_id
 departments
 dept_id | dept_name
 --- | --- |
-101 | HR
+101 | HR 
 102 | Engineering
 104 | Sales
 
@@ -81,7 +81,7 @@ dept_id | dept_name
     ```
     - Result:
     employee_name | dept_name
-    --- | ---
+    --- | --- |
     John Doe | HR
     Alice Jones | HR
     Jane Smith | Engineering
