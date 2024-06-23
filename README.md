@@ -19,3 +19,10 @@ A repository to recall commonly used SQL commands.
   - Modifies existing records
 - ### DELETE
   - Removes record from table
+
+# Queries
+- ### Basic Select
+- This will select all columns
+  ```
+  SELECT * FROM table_name
+  ```
