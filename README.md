@@ -8,7 +8,7 @@ A repository to recall commonly used SQL commands.
 - [Advanced Queries](#advanced-queries)
   - [Example Tables](#example-tables)
   - [Joins](#joins)
-    - [INNER JOIN](#inner-joins)
+    - [INNER JOIN](#inner-join)
 
 # Definitions
 ## SQL
@@ -117,7 +117,7 @@ dept_id | dept_name
 104 | Sales
 
 - ### Joins
-  - #### INNER JOIN
+  - INNER JOIN
     - Returns only the rows that have matching values in both tables.
     ```
     SELECT employees.employee_name, departments.dept_name
