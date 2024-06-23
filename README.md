@@ -23,8 +23,8 @@ A repository to recall commonly used SQL commands.
     - [INNER JOIN](#inner-join)
     - [LEFT JOIN](#left-join-or-left-outer-join)
     - [RIGHT JOIN](#RIGHT-JOIN-or-RIGHT-OUTER-JOIN)
-    - [](#)
-    - [](#)
+    - [FULL JOIN](#FULL-JOIN-or-FULL-OUTER-JOIN)
+    - [CROSS JOIN](#CROSS-JOIN)
 
 # Definitions
 ### SQL
@@ -180,7 +180,7 @@ dept_id | dept_name
     Jane Smith | Engineering
     NULL | Sales
     
-  - FULL JOIN (or FULL OUTER JOIN)
+  - ### FULL JOIN (or FULL OUTER JOIN)
     - Returns all rows when there is a match in either left or right table. If there is no match, the result is NULL on the side that does not have a match.
     ```
     SELECT employees.employee_name, departments.dept_name
@@ -197,7 +197,7 @@ dept_id | dept_name
     Bob Brown | NULL
     NULL | Sales
     
-  - CROSS JOIN
+  - ### CROSS JOIN
     - Returns the Cartesian product of the two tables, i.e., it returns all possible combinations of rows from the two tables.
     ```
     SELECT employees.employee_name, departments.dept_name
