@@ -148,7 +148,7 @@ dept_id | dept_name
     Alice Jones | HR
     Jane Smith | Engineering
     
-  - LEFT JOIN (or LEFT OUTER JOIN)
+  - ### LEFT JOIN (or LEFT OUTER JOIN)
     - Returns all rows from the left table, and the matched rows from the right table. If no match is found, NULL values are returned for columns from the right table.
     ```
     SELECT employees.employee_name, departments.dept_name
