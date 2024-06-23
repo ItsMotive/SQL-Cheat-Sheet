@@ -71,6 +71,11 @@ A repository to recall commonly used SQL commands.
     OFFSET 2 ROWS
     FETCH NEXT 2 ROWS ONLY;
     ```
+    products
+    product_id | product_name | price
+    --- | --- | --- |
+    4 | Product D | 40.00
+    5 | Product E | 50.00
 
 # Advanced SQL Queries
 
