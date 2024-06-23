@@ -22,7 +22,7 @@ A repository to recall commonly used SQL commands.
 
 # Queries
 - ### Basic Select
-- This will select all columns
+  - This will select all columns
   ```
   SELECT * FROM table_name
   ```
