@@ -74,8 +74,17 @@ dept_id | dept_name
   - INNER JOIN
     - An INNER JOIN returns only the rows that have matching values in both tables
     ```
-    SELECT * FROM table_name
+    SELECT employees.emp_name, departments.dept_name
+    FROM employees
+    INNER JOIN departments
+    ON employees.dept_id = departments.dept_id;
     ```
+    - Result:
+    employee_name | dept_name
+    --- | ---
+    John Doe | HR
+    Alice Jones | HR
+    Jane Smith | Engineering
     
   - LEFT JOIN (or LEFT OUTER JOIN)
     ```
