@@ -53,6 +53,7 @@ A repository to recall commonly used SQL commands.
 
 - ### OFFSET
   - Used to skip a specified number of rows before beginning to return the rows from the query. It is commonly used in conjunction with the LIMIT (or FETCH) clause to implement pagination in a result set.
+  
   products
   product_id | product_name | price
   --- | --- | --- |
