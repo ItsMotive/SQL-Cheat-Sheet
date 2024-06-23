@@ -2,6 +2,13 @@
 A repository to recall commonly used SQL commands.
 
 # Table of Contents
+- [Definitions](#definitions)
+- [Commands](#commands)
+- [Basic Queries](#basic-queries)
+- [Advanced Queries](#advanced-queries)
+  - [Example Tables](#example-tables)
+  - [Joins](#joins)
+    - [INNER JOIN](#inner-joins)
 
 # Definitions
 ## SQL
@@ -90,7 +97,7 @@ A repository to recall commonly used SQL commands.
     4 | Product D | 40.00
     5 | Product E | 50.00
 
-# Advanced SQL Queries
+# Advanced Queries
 
 ### Example Tables: 
 
