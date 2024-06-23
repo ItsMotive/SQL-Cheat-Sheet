@@ -79,7 +79,7 @@ dept_id | dept_name
     INNER JOIN departments
     ON employees.dept_id = departments.dept_id;
     ```
-    - Result:
+    Result:
     employee_name | dept_name
     --- | --- |
     John Doe | HR
