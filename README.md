@@ -221,7 +221,7 @@ dept_id | dept_name
     Bob Brown | Engineering
     Bob Brown | Sales
     
-  - SELF JOIN
+  - ### SELF JOIN
     - A regular join, but the table is joined with itself. This can be useful to compare rows within the same table.
     ```
     SELECT e1.employee_name AS Employee1, e2.employee_name AS Employee2, e1.dept_id
