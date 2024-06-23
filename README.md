@@ -22,7 +22,7 @@ A repository to recall commonly used SQL commands.
   - [Joins](#joins)
     - [INNER JOIN](#inner-join)
     - [LEFT JOIN](#left-join-or-left-outer-join)
-    - [](#)
+    - [RIGHT JOIN](#RIGHT-JOIN-or-RIGHT-OUTER-JOIN)
     - [](#)
     - [](#)
 
@@ -164,7 +164,7 @@ dept_id | dept_name
     Jane Smith | Engineering
     Bob Brown | NULL
     
-  - RIGHT JOIN (or RIGHT OUTER JOIN)
+  - ### RIGHT JOIN (or RIGHT OUTER JOIN)
     - Returns all rows from the right table, and the matched rows from the left table. If no match is found, NULL values are returned for columns from the left table.
     ```
     SELECT employees.employee_name, departments.dept_name
