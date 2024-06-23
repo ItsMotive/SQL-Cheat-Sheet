@@ -4,7 +4,19 @@ A repository to recall commonly used SQL commands.
 # Table of Contents
 - [Definitions](#definitions)
 - [Commands](#commands)
+  - [SELECT](#select)
+  - [FROM](#from)
+  - [INSERT](#insert)
+  - [UPDATE](#update)
+  - [DELETE](#delete)
 - [Basic Queries](#basic-queries)
+  - [SELECT](#select)
+  - [WHERE](#where)
+  - [ORDER BY](#order-by)
+  - [LIMIT](#limit)
+  - [OFFSET](#offset)
+    - [Basic Pagination](#basic-pagination)
+    - [Skipping Rows](#skipping-rows)
 - [Advanced Queries](#advanced-queries)
   - [Example Tables](#example-tables)
   - [Joins](#joins)
@@ -28,7 +40,7 @@ A repository to recall commonly used SQL commands.
   - Removes record from table
 
 # Basic Queries
-- ### Select
+- ### SELECT
   - This will select all columns
   ```
   SELECT * FROM table_name
