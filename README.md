@@ -117,7 +117,7 @@ dept_id | dept_name
 104 | Sales
 
 - ### Joins
-  - INNER JOIN
+  - #### INNER JOIN
     - Returns only the rows that have matching values in both tables.
     ```
     SELECT employees.employee_name, departments.dept_name
