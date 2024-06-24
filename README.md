@@ -510,3 +510,49 @@ employee_id | salary
       - Rows from table w1 will be joined with table w2
       - It will compare current date from table w1 with previous date from table w2
       - It will check to see if current date (table w1) temperature is higher than previous date (table w2) temperature
+        
+- ### CTE Example
+  Activity:
+  | machine_id | process_id | activity_type | timestamp |
+  --- | --- | --- | --- |  
+  | 0          | 0          | start         | 0.712     |
+  | 0          | 0          | end           | 1.520     |
+  | 0          | 1          | start         | 3.140     |
+  | 0          | 1          | end           | 4.120     |
+  | 1          | 0          | start         | 0.550     |
+  | 1          | 0          | end           | 1.550     |
+  | 1          | 1          | start         | 0.430     |
+  | 1          | 1          | end           | 1.420     |
+  | 2          | 0          | start         | 4.100     |
+  | 2          | 0          | end           | 4.512     |
+  | 2          | 1          | start         | 2.500     |
+  | 2          | 1          | end           | 5.000     |
+
+  - Write a solution to find the average activity time of each machine
+  ```
+  with cte as (
+  select
+    a.machine_id,
+    a.process_id,
+    a.timestamp as start_time,
+    b.timestamp as end_time
+  from Activity as a
+  join Activity as b
+  on a.machine_id = b.machine_id
+  and a.process_id = b.process_id
+  and a.activity_type = 'start'
+  and b.activity_type = 'end'
+  )
+  select
+    machine_id,
+    round(avg(end_time - start_time)::numeric, 3) as processing_time
+  from cte
+  group by machine_id
+  ```
+  Result:
+  | machine_id | processing_time |
+  | --- | --- |
+  | 0          | 0.894
+  | 1          | 0.995
+  | 2          | 1.456
+  
