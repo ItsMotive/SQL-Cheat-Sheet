@@ -37,7 +37,9 @@ A repository to recall commonly used SQL commands.
   - [UNION ALL](#union-all)
   - [INTERCEPT](#intercept)
   - [EXCEPT](#except)
-  - 
+- [Examples](#examples)
+  - [SELF JOIN](#self-join-example)
+  - [CTE](#cte-example)
        
 
 # Definitions
@@ -472,3 +474,103 @@ employee_id | salary
   )
   ```
 
+# Examples
+- ### SELF JOIN Example
+
+  Weather:
+   id | recordDate | temperature |
+  --- |--- | --- |
+  | 1  | 2015-01-01 | 10
+  | 2  | 2015-01-02 | 25
+  | 3  | 2015-01-03 | 20
+  | 4  | 2015-01-04 | 30
+  
+  - Write a solution to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
+  ```
+  SELECT w1.id
+  FROM Weather w1
+  JOIN Weather w2 
+  ON w1.recordDate = DATE_ADD(w2.recordDate, INTERVAL 1 DAY)
+  WHERE w1.temperature > w2.temperature
+  ```
+  Result: 
+  | Id |
+  | --- |
+  | 2  |
+  | 4  |
+
+  - Explanation
+    ```
+    ON w1.recordDate = DATE_ADD(w2.recordDate, INTERVAL 1 DAY)
+    ```
+    - The ON clause specifies that a row in w1 should be joined with a row in w2 where w1.recordDate is exactly one day after w2.recordDate.
+    - DATE_ADD(w2.recordDate, INTERVAL 1 DAY) adds one day to w2.recordDate, matching it with w1.recordDate.
+      - This implies: w1.date = w2.date + 1 --> w2.date = w1.date - 1. Therefore w2.date is one day before w1.date.
+    - The whole process:
+      - Table will include w1.id
+      - Rows from table w1 will be joined with table w2
+      - It will compare current date from table w1 with previous date from table w2
+      - It will check to see if current date (table w1) temperature is higher than previous date (table w2) temperature
+        
+- ### CTE Example
+  Activity:
+  | machine_id | process_id | activity_type | timestamp |
+  --- | --- | --- | --- |  
+  | 0          | 0          | start         | 0.712     |
+  | 0          | 0          | end           | 1.520     |
+  | 0          | 1          | start         | 3.140     |
+  | 0          | 1          | end           | 4.120     |
+  | 1          | 0          | start         | 0.550     |
+  | 1          | 0          | end           | 1.550     |
+  | 1          | 1          | start         | 0.430     |
+  | 1          | 1          | end           | 1.420     |
+  | 2          | 0          | start         | 4.100     |
+  | 2          | 0          | end           | 4.512     |
+  | 2          | 1          | start         | 2.500     |
+  | 2          | 1          | end           | 5.000     |
+
+  - Write a solution to find the average activity time of each machine
+  ```
+  WITH cte as (
+  SELECT
+    a.machine_id,
+    a.process_id,
+    a.timestamp as start_time,
+    b.timestamp as end_time
+  FROM Activity as a
+  JOIN Activity as b
+  ON a.machine_id = b.machine_id
+  AND a.process_id = b.process_id
+  AND a.activity_type = 'start'
+  AND b.activity_type = 'end'
+  )
+  SELECT
+    machine_id,
+    round(avg(end_time - start_time)::numeric, 3) as processing_time
+  FROM cte
+  GROUP BY machine_id
+  ```
+  Result:
+  | machine_id | processing_time |
+  | --- | --- |
+  | 0          | 0.894
+  | 1          | 0.995
+  | 2          | 1.456
+
+  - Explanation:
+    - Creates a CTE (Common Table Expression)
+      - Has columns of machine_id, process_id, start_time, end_time
+      - ON a.machine_id = b.machine_id
+        - Matches the machine_ids
+      - AND a.process_id = b.process_id
+        - Matches the process_ids
+      - AND a.activity_type = 'start'
+        - Sets Activity A as the start times
+      - AND b.activity_type = 'end'
+        - Sets Activity B as the end times
+    - Use the CTE as the table
+      - round(avg(end_time - start_time)::numeric, 3) as processing_time
+        - Calculates difference between end and start time for each process_id
+        - Averages the results for each machine_id
+        - Finally rounds to the nearest 3 decimals
+  
