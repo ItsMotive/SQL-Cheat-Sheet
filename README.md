@@ -276,6 +276,66 @@ employee_id | salary
     Jane Smith | 55000
     Bob Brown | 70000
 
+  - ### Using WHERE
+    ```
+    SELECT employee_name 
+    FROM employees
+    WHERE employee_id IN (SELECT employee_id 
+                 FROM salaries 
+                 WHERE salary > (SELECT AVG(salary) FROM salaries));
+    ```
+    Result:
+    employee_name |
+    --- |
+    Jane Smith  
+    Bob Brown
+
+  - ### Using FROM
+    ```
+    SELECT dept_id, AVG(salary) AS avg_salary
+    FROM (SELECT employees.dept_id, salaries.salary 
+      FROM employees 
+      JOIN salaries ON employees.employee_id = salaries.employee_id) AS dept_salaries
+    GROUP BY dept_id;
+    ```
+    Results:
+    dept_id | avg_salary
+    --- | --- |
+    101 | 52500 
+    102 | 60000
+    103 | 70000
+
+  - ### Using HAVING
+    ```
+    SELECT dept_id, SUM(salary) AS total_salary
+    FROM employees
+    JOIN salaries ON employees.emp_id = salaries.emp_id
+    GROUP BY dept_id
+    HAVING SUM(salary) > (SELECT AVG(total_salary) 
+                      FROM (SELECT SUM(salary) AS total_salary 
+                            FROM employees 
+                            JOIN salaries ON employees.emp_id = salaries.emp_id 
+                            GROUP BY dept_id) AS dept_totals);
+    ```
+    Results:
+    dept_id | avg_salary
+    --- | --- |
+    103 | 70000
+
+  - ### Correlated
+  - A subquery that references columns from the outer query. It is evaluated once for each row processed by the outer query.
+    ```
+    SELECT employee_name 
+    FROM employees e
+    WHERE salary > (SELECT AVG(salary) 
+                FROM salaries s 
+                WHERE s.dept_id = e.dept_id);
+    ```
+    Results:
+    emp_name | dept_id | salary
+    --- | --- | --- |
+    Alice Jones | 101 | 55000
+
 - ### Insert
   - Inserts data into table
   ```
