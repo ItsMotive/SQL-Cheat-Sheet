@@ -252,7 +252,7 @@ employee_id | salary
     John Doe | Alice Jones | 101
 
 - ### Subqueries
-  - known as inner queries or nested queries, are queries within another SQL query. They are used to perform operations that depend on the results of another query. Subqueries can be placed in various parts of an SQL statement.
+  - Known as inner queries or nested queries, are queries within another SQL query. They are used to perform operations that depend on the results of another query. Subqueries can be placed in various parts of an SQL statement.
     
   - ### Types
     - Scalar : Returns single value
@@ -323,7 +323,8 @@ employee_id | salary
     103 | 70000
 
   - ### Correlated
-  - A subquery that references columns from the outer query. It is evaluated once for each row processed by the outer query.
+    
+    - A subquery that references columns from the outer query. It is evaluated once for each row processed by the outer query.
     ```
     SELECT employee_name 
     FROM employees e
@@ -332,9 +333,107 @@ employee_id | salary
                 WHERE s.dept_id = e.dept_id);
     ```
     Results:
-    emp_name | dept_id | salary
+    employee_name | dept_id | salary
     --- | --- | --- |
     Alice Jones | 101 | 55000
+
+- ### UNION
+
+  employee_us
+  emp_id | emp_name |	country
+  --- | --- | --- |
+  1	| John Doe | USA
+  2	| Jane Smith | USA
+  3	| Alice Jones | USA
+  
+  employee_uk
+  emp_id | emp_name | country
+  --- | --- | --- |
+  4	| Bob Brown | UK
+  5	| Charlie Black | UK
+  2	| Jane Smith | UK
+
+  - Combines the results of two or more SELECT statements and removes duplicate rows from the result set.
+    ```
+    SELECT emp_id, emp_name, country
+    FROM employees_us
+    UNION
+    SELECT emp_id, emp_name, country
+    FROM employees_uk;
+    ```
+    Result:
+    emp_id | emp_name	| country
+    --- | --- | --- |
+    1	| John Doe |USA
+    2	| Jane Smith | USA
+    3	| Alice Jones | USA
+    4	| Bob Brown | UK
+    5	| Charlie Black | UK
+
+- ### UNION ALL
+  - Combines the results of two or more SELECT statements and includes all rows, including duplicates.
+    ```
+    SELECT emp_id, emp_name, country
+    FROM employees_us
+    UNION ALL
+    SELECT emp_id, emp_name, country
+    FROM employees_uk;
+    ```
+    Result:
+    emp_id | emp_name	| country
+    --- | --- | --- |
+    1	| John Doe |USA
+    2	| Jane Smith | USA
+    3	| Alice Jones | USA
+    4	| Bob Brown | UK
+    5	| Charlie Black | UK
+    2 | Jane Smith | UK
+
+- ### INTERSECT
+  - Returns the common rows from two SELECT statements, meaning it returns only the rows that are present in both result sets.
+
+  employees_current
+  emp_id | emp_name | country
+  --- | --- | --- |
+  1	| John Doe | USA
+  2	| Jane Smith | USA
+  3	| Alice Jones | USA
+  4	| Bob Brown | UK
+
+  employees_previous
+  emp_id | emp_name | country
+  --- | --- | --- |
+  2 | Jane Smith | USA
+  3	| Alice Jones | USA
+  5	| Charlie Black	| UK
+
+  ```
+  SELECT emp_id, emp_name, country
+  FROM employees_current
+  INTERSECT
+  SELECT emp_id, emp_name, country
+  FROM employees_previous;
+  ```
+  Result:
+  emp_id | emp_name	| country
+  --- | --- | --- |
+  2	| Jane Smith | USA
+  3	| Alice Jones	| USA
+
+- ### EXCEPT
+  - Returns the rows from the first SELECT statement that are not present in the second SELECT statement.
+    ```
+    SELECT emp_id, emp_name, country
+    FROM employees_current
+    EXCEPT
+    SELECT emp_id, emp_name, country
+    FROM employees_previous;
+    ```
+    Result:
+    emp_id | emp_name	| country
+    1	| John Doe | USA
+    4	| Bob Brown	| UK
+
 
 - ### Insert
   - Inserts data into table
