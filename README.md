@@ -26,6 +26,14 @@ A repository to recall commonly used SQL commands.
     - [FULL JOIN](#FULL-JOIN-or-FULL-OUTER-JOIN)
     - [CROSS JOIN](#CROSS-JOIN)
     - [SELF JOIN](#SELF-JOIN)
+  - [Subqueries](#subqueries)
+    - [Types](#types)
+    - [Using SELECT](#using-select)
+    - [Using FROM](#using-from)
+    - [Using WHERE](#using-where)
+    - [Using HAVING](#using-having)
+    - [Correlated](#correlated)
+       
 
 # Definitions
 ### SQL
@@ -133,6 +141,14 @@ dept_id | dept_name
 102 | Engineering
 104 | Sales
 
+salaries
+employee_id | salary
+--- | --- |
+1 | 50000 
+2 | 60000
+3 | 55000
+4 | 70000
+
 - ### Joins
   - #### INNER JOIN
     - Returns only the rows that have matching values in both tables.
@@ -230,9 +246,35 @@ dept_id | dept_name
     ON e1.dept_id = e2.dept_id
     AND e1.employee_id < e2.employee_id;
     ```
+    Result:
     Employee1 | Employee2 | dept_id
     --- | --- | --- |
     John Doe | Alice Jones | 101
+
+- ### Subqueries
+  - known as inner queries or nested queries, are queries within another SQL query. They are used to perform operations that depend on the results of another query. Subqueries can be placed in various parts of an SQL statement.
+    
+  - ### Types
+    - Scalar : Returns single value
+    - Row : Returns one row with one or more columns
+    - Column : Returns a single column of data, usually used with operators like IN
+    - Table : Returns a set that can act as a table
+      
+  - ### Using Select
+    ```
+    SELECT employee_name, 
+      (SELECT salary 
+        FROM salaries 
+        WHERE employees.employee_id = salaries.employee_id) AS employee_salary
+    FROM employees;
+    ```
+    Result:
+    employee_name | employee_salary
+    --- | --- |
+    John Doe  | 50000 
+    Alice Jones | 60000
+    Jane Smith | 55000
+    Bob Brown | 70000
 
 - ### Insert
   - Inserts data into table
