@@ -33,6 +33,11 @@ A repository to recall commonly used SQL commands.
     - [Using WHERE](#using-where)
     - [Using HAVING](#using-having)
     - [Correlated](#correlated)
+  - [UNION](#union)
+  - [UNION ALL](#union-all)
+  - [INTERCEPT](#intercept)
+  - [EXCEPT](#except)
+  - 
        
 
 # Definitions
@@ -338,6 +343,7 @@ employee_id | salary
     Alice Jones | 101 | 55000
 
 - ### UNION
+  - Combines the results of two or more SELECT statements and removes duplicate rows from the result set.
 
   employee_us
   emp_id | emp_name |	country
@@ -353,7 +359,6 @@ employee_id | salary
   5	| Charlie Black | UK
   2	| Jane Smith | UK
 
-  - Combines the results of two or more SELECT statements and removes duplicate rows from the result set.
     ```
     SELECT emp_id, emp_name, country
     FROM employees_us
@@ -431,6 +436,7 @@ employee_id | salary
     ```
     Result:
     emp_id | emp_name	| country
+    --- | --- | --- |
     1	| John Doe | USA
     4	| Bob Brown	| UK
 
