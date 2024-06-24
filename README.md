@@ -501,5 +501,6 @@ employee_id | salary
     ```
     ON w1.recordDate = DATE_ADD(w2.recordDate, INTERVAL 1 DAY)
     ```
-    The ON clause specifies that a row in w1 should be joined with a row in w2 where w1.recordDate is exactly one day after w2.recordDate.
-    DATE_ADD(w2.recordDate, INTERVAL 1 DAY) adds one day to w2.recordDate, matching it with w1.recordDate.
+    - The ON clause specifies that a row in w1 should be joined with a row in w2 where w1.recordDate is exactly one day after w2.recordDate.
+    - DATE_ADD(w2.recordDate, INTERVAL 1 DAY) adds one day to w2.recordDate, matching it with w1.recordDate.
+      - This implies: w1.date = w2.date + 1 --> w2.date = w1.date - 1. Therefore w2.date is one day before w1.date. 
