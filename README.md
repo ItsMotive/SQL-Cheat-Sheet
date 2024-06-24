@@ -39,6 +39,7 @@ A repository to recall commonly used SQL commands.
   - [EXCEPT](#except)
 - [Examples](#examples)
   - [SELF JOIN](#self-join-example)
+  - [CTE](#cte-example)
        
 
 # Definitions
@@ -530,24 +531,24 @@ employee_id | salary
 
   - Write a solution to find the average activity time of each machine
   ```
-  with cte as (
-  select
+  WITH cte as (
+  SELECT
     a.machine_id,
     a.process_id,
     a.timestamp as start_time,
     b.timestamp as end_time
-  from Activity as a
-  join Activity as b
-  on a.machine_id = b.machine_id
-  and a.process_id = b.process_id
-  and a.activity_type = 'start'
-  and b.activity_type = 'end'
+  FROM Activity as a
+  JOIN Activity as b
+  ON a.machine_id = b.machine_id
+  AND a.process_id = b.process_id
+  AND a.activity_type = 'start'
+  AND b.activity_type = 'end'
   )
-  select
+  SELECT
     machine_id,
     round(avg(end_time - start_time)::numeric, 3) as processing_time
-  from cte
-  group by machine_id
+  FROM cte
+  GROUP BY machine_id
   ```
   Result:
   | machine_id | processing_time |
@@ -555,4 +556,21 @@ employee_id | salary
   | 0          | 0.894
   | 1          | 0.995
   | 2          | 1.456
+
+  - Explanation:
+    - Creates a CTE (Common Table Expression)
+      - Has columns of machine_id, process_id, start_time, end_time
+      - ON a.machine_id = b.machine_id
+        - Matches the machine_ids
+      - AND a.process_id = b.process_id
+        - Matches the process_ids
+      - AND a.activity_type = 'start'
+        - Sets Activity A as the start times
+      - AND b.activity_type = 'end'
+        - Sets Activity B as the end times
+    - Use the CTE as the table
+      - round(avg(end_time - start_time)::numeric, 3) as processing_time
+        - Calculates difference between end and start time for each process_id
+        - Averages the results for each machine_id
+        - Finally rounds to the nearest 3 decimals
   
