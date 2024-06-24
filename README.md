@@ -38,6 +38,7 @@ A repository to recall commonly used SQL commands.
   - [INTERCEPT](#intercept)
   - [EXCEPT](#except)
 - [Examples](#examples)
+  - [SELF JOIN](#self-join-example)
        
 
 # Definitions
@@ -503,4 +504,9 @@ employee_id | salary
     ```
     - The ON clause specifies that a row in w1 should be joined with a row in w2 where w1.recordDate is exactly one day after w2.recordDate.
     - DATE_ADD(w2.recordDate, INTERVAL 1 DAY) adds one day to w2.recordDate, matching it with w1.recordDate.
-      - This implies: w1.date = w2.date + 1 --> w2.date = w1.date - 1. Therefore w2.date is one day before w1.date. 
+      - This implies: w1.date = w2.date + 1 --> w2.date = w1.date - 1. Therefore w2.date is one day before w1.date.
+    - The whole process:
+      - Table will include w1.id
+      - Rows from table w1 will be joined with table w2
+      - It will compare current date from table w1 with previous date from table w2
+      - It will check to see if current date (table w1) temperature is higher than previous date (table w2) temperature
