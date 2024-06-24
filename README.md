@@ -37,7 +37,7 @@ A repository to recall commonly used SQL commands.
   - [UNION ALL](#union-all)
   - [INTERCEPT](#intercept)
   - [EXCEPT](#except)
-  - 
+- [Examples](#examaples)
        
 
 # Definitions
@@ -471,4 +471,37 @@ employee_id | salary
         column_name2 VARCHAR(50) NOT NULL
   )
   ```
+
+# Examples
+- ### Subquery Example
+
+Weather:
+ id | recordDate | temperature |
+--- |--- | --- |
+| 1  | 2015-01-01 | 10
+| 2  | 2015-01-02 | 25
+| 3  | 2015-01-03 | 20
+| 4  | 2015-01-04 | 30
+
+- Write a solution to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
+```
+WITH WeatherCTE AS(
+    SELECT 
+        id, 
+        recordDate, 
+        temperature,
+        ROW_NUMBER() OVER (ORDER BY recordDate) as rn
+    FROM Weather
+)
+SELECT w2.id as Id
+FROM WeatherCTE as w1
+INNER JOIN WeatherCTE as w2
+ON w1.rn = w2.rn - 1
+WHERE w2.temperature > w1.temperature
+```
+Result: 
+| Id |
+| --- |
+| 2  |
+| 4  |
 
