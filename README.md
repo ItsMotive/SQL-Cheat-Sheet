@@ -473,7 +473,7 @@ employee_id | salary
   ```
 
 # Examples
-- ### SELF JOIN/CTE (Common Table Expression) Example
+- ### SELF JOIN Example
 
   Weather:
    id | recordDate | temperature |
@@ -485,19 +485,11 @@ employee_id | salary
   
   - Write a solution to find all dates' Id with higher temperatures compared to its previous dates (yesterday).
   ```
-  WITH WeatherCTE AS(
-      SELECT 
-          id, 
-          recordDate, 
-          temperature,
-          ROW_NUMBER() OVER (ORDER BY recordDate) as rn
-      FROM Weather
-  )
-  SELECT w2.id as Id
-  FROM WeatherCTE as w1
-  INNER JOIN WeatherCTE as w2
-  ON w1.rn = w2.rn - 1
-  WHERE w2.temperature > w1.temperature
+  SELECT w1.id
+  FROM Weather w1
+  JOIN Weather w2 
+  ON w1.recordDate = DATE_ADD(w2.recordDate, INTERVAL 1 DAY)
+  WHERE w1.temperature > w2.temperature
   ```
   Result: 
   | Id |
@@ -507,21 +499,7 @@ employee_id | salary
 
   - Explanation
     ```
-    WITH WeatherCTE AS(
-        SELECT 
-            id, 
-            recordDate, 
-            temperature,
-            ROW_NUMBER() OVER (ORDER BY recordDate) as rn
-        FROM Weather
-    )
+    ON w1.recordDate = DATE_ADD(w2.recordDate, INTERVAL 1 DAY)
     ```
-    This will create a CTE of the existing table. ROW_NUMBER() creates a sequential integer to each row. OVER(ORDER BY) orders column.
-    ```
-    SELECT w2.id as Id
-    FROM WeatherCTE as w1
-    INNER JOIN WeatherCTE as w2
-    ON w1.rn = w2.rn - 1
-    WHERE w2.temperature > w1.temperature
-    ```
-    SELF JOIN to compare the row number. Checks to see if entry_2.row_number is greater than entry_1.row_number. 
+    The ON clause specifies that a row in w1 should be joined with a row in w2 where w1.recordDate is exactly one day after w2.recordDate.
+    DATE_ADD(w2.recordDate, INTERVAL 1 DAY) adds one day to w2.recordDate, matching it with w1.recordDate.
