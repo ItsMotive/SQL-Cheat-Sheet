@@ -473,7 +473,7 @@ employee_id | salary
   ```
 
 # Examples
-- ### Subquery Example
+- ### SELF JOIN/CTE (Common Table Expression) Example
 
   Weather:
    id | recordDate | temperature |
@@ -505,3 +505,23 @@ employee_id | salary
   | 2  |
   | 4  |
 
+  - Explanation
+    ```
+    WITH WeatherCTE AS(
+        SELECT 
+            id, 
+            recordDate, 
+            temperature,
+            ROW_NUMBER() OVER (ORDER BY recordDate) as rn
+        FROM Weather
+    )
+    ```
+    This will create a CTE of the existing table. ROW_NUMBER() creates a sequential integer to each row. OVER(ORDER BY) orders column.
+    ```
+    SELECT w2.id as Id
+    FROM WeatherCTE as w1
+    INNER JOIN WeatherCTE as w2
+    ON w1.rn = w2.rn - 1
+    WHERE w2.temperature > w1.temperature
+    ```
+    SELF JOIN to compare the row number. Checks to see if entry_2.row_number is greater than entry_1.row_number. 
